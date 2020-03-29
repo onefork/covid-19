@@ -5,8 +5,7 @@ import { Sigma } from "react-sigma";
 
 import SigmaLoader from "./Sigma/Loader";
 import NodeShapes from "./Sigma/NodeShapes";
-
-import "./styles.css";
+import FilterMenu from "./Components/FilterMenu"
 
 class App extends React.Component {
 
@@ -15,7 +14,10 @@ class App extends React.Component {
 
     window.addEventListener('resize', this.updateDimensions);
 
-    let json = require('../src/data.json')
+    let json = Object.freeze(require('../src/data.json'))
+    const jsonCopy = JSON.parse(JSON.stringify(json));
+
+    // this.jsonUnfiltered = {nodes: jsonCopy.nodes, edges: jsonCopy.edges}
 
     let cleanedEdges = json.edges.filter((edge) => {
       return edge.target !== edge.source
@@ -23,6 +25,8 @@ class App extends React.Component {
 
 
     this.state = {
+      // jsonNodesUnfiltered: jsonCopy.nodes,
+      // jsonEdgesUnfiltered: jsonCopy.edges,
       jsonNodes: json.nodes,
       jsonEdges: cleanedEdges,
       height: window.innerHeight,
@@ -53,50 +57,90 @@ class App extends React.Component {
         height: "100%",
         margin: '0px'
       }
+      
     };
 
 
-    this.graphData = {
-      nodes: this.state.jsonNodes,
-      edges: this.state.jsonEdges
-    };
+    // this.graphData = {
+    //   nodes: this.state.jsonNodes,
+    //   edges: this.state.jsonEdges
+    // };
 
   }
+
+  // componentDidUpdate() {
+  //   const jsonReRender = this.loadData()
+  //   if (this.state.jsonNodesUnfiltered.length !== jsonReRender.nodes.length) {
+  //     this.setState({jsonNodes: jsonReRender.nodes})
+  //   }
+  // }
+
+  loadData = () => JSON.parse(JSON.stringify(require('../src/data_original.json')));
+
 
   updateDimensions = (e) => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
 
   handleClickNode = (e) => {
-    let target = e.data.node.id
-    console.log(target)
-    let filterKeys = {}
-    let filteredEdges = this.state.jsonEdges.map((edge) => {
-      if (target === edge.source || target == edge.target) {
-        filterKeys[edge.source] = true
-        filterKeys[edge.target] = true
-
-      } else {
-        edge.color = "rgba(192, 192, 192, 0.25)"
-      }
-      return edge
+    let reloadedJson = this.loadData()
+    let cleanedEdges = reloadedJson.edges.filter((edge) => {
+      return edge.target !== edge.source
     })
+    if (this.state.clickedNodeId !== e.data.node.id) {
+      let target = e.data.node.id
+      this.setState({clickedNodeId: target})
+      let filterKeys = {}
+      let filteredEdges = cleanedEdges.map((edge) => {
+        if (target === edge.source || target === edge.target) {
+          filterKeys[edge.source] = true
+          filterKeys[edge.target] = true
 
-    let filteredNodes = this.state.jsonNodes.map((node) => {
-      if (filterKeys[node.id]) {
-        node.size = 20
+        } else {
+          edge.color = "rgba(192, 192, 192, 0.25)"
+        }
+        return edge
+      })
+
+      let filteredNodes = reloadedJson.nodes.map((node) => {
+        if (filterKeys[node.id]) {
+          node.size = 5
+        } else {
+          node.color = "rgba(192, 192, 192, 0.4)"
+        }
+        return node
+      })
+      this.setState({jsonEdges: filteredEdges, jsonNodes: filteredNodes})
+    } else {
+      // this.graphData = {nodes: this.state.jsonNodesUnfiltered, edges: this.state.jsonEdgesUnfiltered}
+      this.setState({clickedNodeId: null, jsonNodes: reloadedJson.nodes, jsonEdges: reloadedJson.edges})
+
+    }
+  }
+
+  filterNodes = (str) => {
+    let filterObj = {}
+    let loadedJSON = this.loadData()
+    let filteredNodes = loadedJSON.nodes.map((node) => {
+      if (node.label.includes(str)) {
+        filterObj[node.id] = true
       } else {
-        node.color = "rgba(192, 192, 192, 0.8)"
+        node.color = "rgba(192, 192, 192, 0.2)"
       }
       return node
     })
-    this.setState({jsonEdges: filteredEdges, jsonNodes: filteredNodes})
 
+    let filteredEdges = loadedJSON.edges.map((edge) => {
+      edge.color = "rgba(192, 192, 192, 0.2)"
+      return edge
+    })
+    this.setState({jsonNodes: filteredNodes, jsonEdges: filteredEdges})
   }
 
   render() {
     return (
       <div className="App" style={{height: this.state.height, minHeight: '700px', width: this.state.width, minWidth: '700px'}}>
+        <FilterMenu filterNodes={this.filterNodes}></FilterMenu>
         <Sigma
           onClick={this.handleClick}
           renderer="canvas"
@@ -104,7 +148,7 @@ class App extends React.Component {
           style={this.state.style}
           onClickNode={this.handleClickNode}
         >
-          <SigmaLoader graph={this.graphData}>
+          <SigmaLoader graph={{nodes: this.state.jsonNodes, edges: this.state.jsonEdges}}>
             <NodeShapes />
           </SigmaLoader>
         </Sigma>
