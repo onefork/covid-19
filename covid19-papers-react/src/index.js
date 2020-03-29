@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from 'react-dom'
 
 import { Sigma } from "react-sigma";
 
@@ -8,13 +8,25 @@ import NodeShapes from "./Sigma/NodeShapes";
 
 import "./styles.css";
 
-class App extends Component {
+class App extends React.Component {
 
   constructor(props) {
     super(props);
 
+    window.addEventListener('resize', this.updateDimensions);
+
+    let json = require('../src/data.json')
+
+    let cleanedEdges = json.edges.filter((edge) => {
+      return edge.target !== edge.source
+    })
+
+
     this.state = {
-      filterNeighbours: "",
+      jsonNodes: json.nodes,
+      jsonEdges: cleanedEdges,
+      height: window.innerHeight,
+      width: window.innerWidth,
       settings: {
         // Drawing Properties
         "labelThreshold": 14,
@@ -26,12 +38,12 @@ class App extends Component {
         "defaultLabelHoverColor": "#fff",
         "fontStyle": "bold",
         "hoverFontStyle": "bold",
-        "defaultLabelSize": 14,
+        "defaultLabelSize": 10,
         // Graph Properties
         "maxEdgeSize": 0.5,
         "minEdgeSize": 0.2,
         "minNodeSize": 1,
-        "maxNodeSize": 7,
+        "maxNodeSize": 3,
         // Mouse Properties
         "maxRatio": 20,
         "minRatio": 0.75
@@ -43,22 +55,54 @@ class App extends Component {
       }
     };
 
-    let json = require('../src/data.json')
 
     this.graphData = {
-      nodes: json.nodes,
-      edges: []
+      nodes: this.state.jsonNodes,
+      edges: this.state.jsonEdges
     };
+
+  }
+
+  updateDimensions = (e) => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  };
+
+  handleClickNode = (e) => {
+    let target = e.data.node.id
+    console.log(target)
+    let filterKeys = {}
+    let filteredEdges = this.state.jsonEdges.map((edge) => {
+      if (target === edge.source || target == edge.target) {
+        filterKeys[edge.source] = true
+        filterKeys[edge.target] = true
+
+      } else {
+        edge.color = "rgba(192, 192, 192, 0.25)"
+      }
+      return edge
+    })
+
+    let filteredNodes = this.state.jsonNodes.map((node) => {
+      if (filterKeys[node.id]) {
+        node.size = 20
+      } else {
+        node.color = "rgba(192, 192, 192, 0.8)"
+      }
+      return node
+    })
+    this.setState({jsonEdges: filteredEdges, jsonNodes: filteredNodes})
 
   }
 
   render() {
     return (
-      <div className="App" style={{height: window.innerHeight, width: window.innerWidth}}>
+      <div className="App" style={{height: this.state.height, minHeight: '700px', width: this.state.width, minWidth: '700px'}}>
         <Sigma
+          onClick={this.handleClick}
           renderer="canvas"
           settings={this.state.settings}
           style={this.state.style}
+          onClickNode={this.handleClickNode}
         >
           <SigmaLoader graph={this.graphData}>
             <NodeShapes />
