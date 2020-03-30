@@ -1,3 +1,9 @@
+# COVID-19 Paper Search
+
+[Live Demo](https://onefork.github.io/covid-19/)
+
+![screenshot](https://onefork.github.io/covid-19/preview.gif "Screenshot")
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
