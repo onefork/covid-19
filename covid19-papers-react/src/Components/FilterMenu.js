@@ -7,9 +7,18 @@ import ColorWheel from '../icons/ColorWheel.png'
 
 
 class FilterMenu extends React.Component {
+
+    state = {
+        clicked: false
+    }
+
+    handleClick = () => {
+        this.setState({clicked: !this.state.clicked})
+    }
+
     render() {
         return(
-            <div id="FilterMenuContainer">
+            <div id="FilterMenuContainer" style={this.state.clicked? {left: '-291px'} : {left: '10px'}}>
                 <div id="FilterAbsolute">
                     <div id="FilterMenu">
                         <div id="MenuTitleContainer">
@@ -27,18 +36,18 @@ class FilterMenu extends React.Component {
                                         <span id="NodeLabel">.</span><span className="LegendLabelText" id="NodeLabelText">Paper</span>
                                     </div>
                                     <div style={{textAlign: "left"}}>
-                                        <img src={line} style={{height: '12px', width: '12px', marginLeft: '10px' }}></img><span className="LegendLabelText" id="NodeLabelText">Distance Between Abstract Text</span>
+                                        <img src={line} alt="Line" style={{height: '12px', width: '12px', marginLeft: '10px' }}></img><span className="LegendLabelText" id="NodeLabelText">Distance Between Abstract Text</span>
                                     </div>
                                     <div style={{textAlign: "left", marginTop: '20px'}}>
-                                        <img src={ColorWheel} style={{height: '13px', width: '13px', marginLeft: '10px' }}></img><span className="LegendLabelText" id="NodeLabelText">Article Cluster</span>
+                                        <img src={ColorWheel} alt="ColorWheel" style={{height: '13px', width: '13px', marginLeft: '10px' }}></img><span className="LegendLabelText" id="NodeLabelText">Article Cluster</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <hr style={{width: '90%', marginTop: '20px'}}></hr>
-                        <SearchContainer filterNodes={this.props.filterNodes}></SearchContainer>
+                        <SearchContainer resetData={this.props.resetData} filterNodes={this.props.filterNodes}></SearchContainer>
                     </div>
-                    <div id="ArrowContainer"><img id="ArrowImage" src={`${arrow}`} alt="arrow image"></img></div>
+                    <div onClick={this.handleClick} id="ArrowContainer"><img id="ArrowImage" src={`${arrow}`} style={this.state.clicked? {transform: 'rotate(0deg)'} : {transform: 'rotate(180deg)'}} alt="arrow"></img></div>
                 </div>
             </div>
         )
