@@ -29,26 +29,57 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedInputBase(props) {
+const SearchInput = ({ value = '', onChange, onSearch, onMenu, onGraph }) => {
   const classes = useStyles();
 
+  // console.log('render')
+
+  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+  // const [cValue, setCValue] = React.useState('');
+  // const handleChange = (event) => {
+  //   onChange && onChange(event);
+  //   value === undefined && setCValue(event.target.value);
+  // };
+  // console.log('value=', value,',', cValue);
+  // value === undefined || cValue === value || setCValue(value); // does it cause 2 renders for the 1st render?
+  // const [test, setTest] = React.useState(Math.random());
+  // const handleTest = () => setTest(test + 1)
+  // console.log('test=', test);
+
   return (
-    <Paper component="form" className={classes.root} onSubmit={(e) => { props.search(); e.preventDefault(); }}>
-      <IconButton className={classes.iconButton} aria-label="menu">
+    <Paper
+      component="form"
+      className={classes.root}
+      onSubmit={event => { onSearch && onSearch(event); event.preventDefault(); }}
+    >
+      <IconButton
+        className={classes.iconButton}
+        aria-label="menu"
+        onClick={onMenu}
+      >
         <MenuIcon />
       </IconButton>
       <InputBase
         className={classes.input}
         placeholder="What are you looking for?"
         inputProps={{ 'aria-label': 'search papers' }}
+        value={value}
+        onChange={onChange}
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
         <SearchIcon />
       </IconButton>
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton color="primary" className={classes.iconButton} aria-label="graph">
+      <IconButton
+        color="primary"
+        className={classes.iconButton}
+        aria-label="graph"
+        onClick={onGraph}
+      >
         <BubbleChartIcon />
       </IconButton>
     </Paper>
   );
 }
+
+export default SearchInput;

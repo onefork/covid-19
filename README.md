@@ -1,4 +1,6 @@
-# COVID-19 Paper Search
+# COVID-19 Papers
+
+*Graphical* search and discovery engine for COVID-19 papers
 
 [Live Demo](https://onefork.github.io/covid-19/)
 
