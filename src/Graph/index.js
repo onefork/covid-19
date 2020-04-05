@@ -1,19 +1,19 @@
 import React from "react";
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 
 import { Sigma } from "react-sigma";
 
 import SigmaLoader from "./Sigma/Loader";
 import FilterMenu from "./Components/FilterMenu"
 
-class App extends React.Component {
+class Graph extends React.Component {
 
   constructor(props) {
     super(props);
 
     window.addEventListener('resize', this.updateDimensions);
 
-    let json = Object.freeze(require('../src/data.json'))
+    let json = Object.freeze(require('./data.json'))
 
     let cleanedEdges = json.edges.filter((edge) => {
       return edge.target !== edge.source
@@ -57,7 +57,7 @@ class App extends React.Component {
     };
   }
 
-  loadData = () => JSON.parse(JSON.stringify(require('../src/data_original.json')));
+  loadData = () => JSON.parse(JSON.stringify(require('./data_original.json')));
 
 
   updateDimensions = (e) => {
@@ -170,5 +170,7 @@ class App extends React.Component {
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<Graph />, rootElement);
+
+export default Graph;
