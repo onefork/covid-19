@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 
 import Search from './Search';
+import Graph from './Graph';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
       </header> */}
       <h1>COVID-19 Papers</h1>
       <Search />
+      <Graph />
     </div>
   );
 }

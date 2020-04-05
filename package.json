@@ -12,7 +12,8 @@
     "material-table": "^1.57.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-sigma": "^1.2.34"
   },
   "scripts": {
     "start": "react-scripts start",
