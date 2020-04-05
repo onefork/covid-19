@@ -1,31 +1,21 @@
 import React from 'react';
 // import logo from './logo.svg';
-import './App.css';
-
+// import './App.css';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import Search from './Search';
 import Graph from './Graph';
 
 const App = () => {
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <h1>COVID-19 Papers</h1>
-      <Search />
-      <Graph />
-    </div>
+    <Container>
+      <Box my={1}>
+        <Typography variant="h4" component="h1" align="center" gutterBottom>COVID-19 Papers</Typography>
+        <Search />
+        <Graph />
+      </Box>
+    </Container>
   );
 }
 
