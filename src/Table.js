@@ -7,11 +7,16 @@ import MaterialTable from 'material-table'
 //
 
 const Table = ({ data, columns }) => {
+  let dataArray;
+  if (Array.isArray(data)) dataArray = data;
+  else if (typeof data === 'object' && data !== null) dataArray = Object.values(data);
+  else dataArray = [];
+  
   return (
     <MaterialTable
       title="I found these papers for you:"
       columns={columns}
-      data={data}
+      data={dataArray}
       detailPanel={[
         {
           tooltip: 'Show Abstract',
