@@ -22,7 +22,7 @@ class SearchContainer extends React.Component {
             }
         })
 
-        this.setState({clusterObj: this.clusterObj, clusterIds: this.clusterIds})
+        this.setState({ clusterObj: this.clusterObj, clusterIds: this.clusterIds })
     }
 
     loadData = () => JSON.parse(JSON.stringify(require('../data_original.json')));
@@ -30,14 +30,14 @@ class SearchContainer extends React.Component {
     editClusterIds = (id) => {
         if (this.state.ActiveClusterIds.includes(id)) {
             let foundId = this.state.clusterIds.indexOf(id)
-            this.setState({ActiveClusterIds: this.state.clusterIds.splice(foundId, 0)})
+            this.setState({ ActiveClusterIds: this.state.clusterIds.splice(foundId, 0) })
         } else {
-            this.setState({ActiveClusterIds: [...this.state.ActiveClusterIds, id]})
+            this.setState({ ActiveClusterIds: [...this.state.ActiveClusterIds, id] })
         }
     }
 
     handleChange = (e) => {
-        this.setState({searchvalue: e.target.value})
+        this.setState({ searchvalue: e.target.value })
     }
 
     handleSubmit = (e) => {
@@ -58,15 +58,15 @@ class SearchContainer extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <div id="SearchBarContainer">
-                <div style={{marginBottom: '10px'}}>Search By Keyword:</div>
-                    <input value={this.state.searchvalue} onChange={this.handleChange}></input>
-                <div style={{marginTop: '10px'}}>Search By Cluster Id:</div>
-                <div style={{width: '95%', height: '200px', marginTop: '10px', overflowY: "auto", borderStyle: "solid", borderWidth: "0px 0.5px 0px 0.5px", borderColor: 'rgba(0, 0, 0, 0.5)'}}>
+                <div style={{ marginBottom: '10px' }}>Search By Keyword:</div>
+                <input value={this.state.searchvalue} onChange={this.handleChange}></input>
+                <div style={{ marginTop: '10px' }}>Search By Cluster Id:</div>
+                <div style={{ width: '95%', height: '200px', marginTop: '10px', overflowY: "auto", borderStyle: "solid", borderWidth: "0px 0.5px 0px 0.5px", borderColor: 'rgba(0, 0, 0, 0.5)' }}>
                     {this.displayIds()}
                 </div>
-                <input type='submit' style={{marginTop: '10px'}} onClick={this.handleSubmit}></input><button style={{marginTop: '10px'}} onClick={this.handleReset}>Reset Graph</button>
+                <input type='submit' style={{ marginTop: '10px' }} onClick={this.handleSubmit}></input><button style={{ marginTop: '10px' }} onClick={this.handleReset}>Reset Graph</button>
             </div>
         )
     }
