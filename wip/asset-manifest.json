@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "https://onefork.github.io/covid-19/wip/static/css/main.93ac47a6.chunk.css",
+    "main.js": "https://onefork.github.io/covid-19/wip/static/js/main.94b44319.chunk.js",
+    "main.js.map": "https://onefork.github.io/covid-19/wip/static/js/main.94b44319.chunk.js.map",
+    "runtime-main.js": "https://onefork.github.io/covid-19/wip/static/js/runtime-main.59a00c33.js",
+    "runtime-main.js.map": "https://onefork.github.io/covid-19/wip/static/js/runtime-main.59a00c33.js.map",
+    "static/js/2.7647795b.chunk.js": "https://onefork.github.io/covid-19/wip/static/js/2.7647795b.chunk.js",
+    "static/js/2.7647795b.chunk.js.map": "https://onefork.github.io/covid-19/wip/static/js/2.7647795b.chunk.js.map",
+    "index.html": "https://onefork.github.io/covid-19/wip/index.html",
+    "precache-manifest.f2a8eae12d02338431abbd7acc5a9bbf.js": "https://onefork.github.io/covid-19/wip/precache-manifest.f2a8eae12d02338431abbd7acc5a9bbf.js",
+    "service-worker.js": "https://onefork.github.io/covid-19/wip/service-worker.js",
+    "static/css/main.93ac47a6.chunk.css.map": "https://onefork.github.io/covid-19/wip/static/css/main.93ac47a6.chunk.css.map",
+    "static/js/2.7647795b.chunk.js.LICENSE.txt": "https://onefork.github.io/covid-19/wip/static/js/2.7647795b.chunk.js.LICENSE.txt",
+    "static/media/ColorWheel.png": "https://onefork.github.io/covid-19/wip/static/media/ColorWheel.e372b9db.png",
+    "static/media/curvedline.png": "https://onefork.github.io/covid-19/wip/static/media/curvedline.19ebd9a2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.59a00c33.js",
+    "static/js/2.7647795b.chunk.js",
+    "static/css/main.93ac47a6.chunk.css",
+    "static/js/main.94b44319.chunk.js"
+  ]
+}
