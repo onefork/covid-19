@@ -1,97 +1,104 @@
 import React from 'react';
 // import ReactDOM from 'react-dom'
-
+import cloneDeep from 'lodash/cloneDeep';
 import { Sigma } from 'react-sigma';
 
 import SigmaLoader from './Sigma/Loader';
 import FilterMenu from './Components/FilterMenu'
+
+import mockup_data from './data';
+
+// TODO
+// handle component resize
+// https://medium.com/hootsuite-engineering/resizing-react-components-6f911ba39b59
+
+const settings = {
+  // Drawing Properties
+  labelThreshold: 14,
+  defaultEdgeType: 'curve',
+  defaultHoverLabelBGColor: '#002147',
+  defaultLabelBGColor: '#ddd',
+  activeFontStyle: 'bold',
+  defaultLabelColor: '#000',
+  defaultLabelHoverColor: '#fff',
+  fontStyle: 'bold',
+  hoverFontStyle: 'bold',
+  defaultLabelSize: 14,
+  // labelSize: 'proportional',
+  // Graph Properties
+  maxEdgeSize: 0.5,
+  minEdgeSize: 0.2,
+  minNodeSize: 1,
+  maxNodeSize: 3,
+  // Mouse Properties
+  maxRatio: 20,
+  minRatio: 0.75,
+};
 
 class Graph extends React.Component {
 
   constructor(props) {
     super(props);
 
-    window.addEventListener('resize', this.updateDimensions);
+    this.graph_data = props.data || mockup_data;
 
-    let json = Object.freeze(require('./data.json'))
-
-    let cleanedEdges = json.edges.filter((edge) => {
-      return edge.target !== edge.source
-    })
+    const data = this.loadData(this.graph_data);
 
     this.state = {
       // jsonNodesUnfiltered: jsonCopy.nodes,
       // jsonEdgesUnfiltered: jsonCopy.edges,
-      jsonNodes: json.nodes,
-      jsonEdges: cleanedEdges,
-      height: window.innerHeight,
-      width: window.innerWidth,
-      settings: {
-        // Drawing Properties
-        labelThreshold: 14,
-        defaultEdgeType: 'curve',
-        defaultHoverLabelBGColor: '#002147',
-        defaultLabelBGColor: '#ddd',
-        activeFontStyle: 'bold',
-        defaultLabelColor: '#000',
-        defaultLabelHoverColor: '#fff',
-        fontStyle: 'bold',
-        hoverFontStyle: 'bold',
-        defaultLabelSize: 10,
-        // Graph Properties
-        maxEdgeSize: 0.5,
-        minEdgeSize: 0.2,
-        minNodeSize: 1,
-        maxNodeSize: 3,
-        // Mouse Properties
-        maxRatio: 20,
-        minRatio: 0.75
-      },
-      style: {
-        width: '100%',
-        height: '100%',
-        margin: '0px'
-      }
-
+      jsonNodes: data.nodes,
+      jsonEdges: data.edges,
+      // ...this.calcDim(),
     };
   }
 
-  loadData = () => JSON.parse(JSON.stringify(require('./data_original.json')));
+  // calcDim = () => ({
+  //   width: '100%',
+  //   height: '100%',
+  //   // width: window.innerWidth,
+  //   // height: window.innerHeight,
+  // });
+  // updateDimensions = () => {
+  //   this.setState(this.calcDim());
+  // };
+  // componentDidMount() {
+  //   window.addEventListener('resize', this.updateDimensions);
+  // }
+  // componentWillUnmount() {
+  //   window.removeEventListener('resize', this.updateDimensions);
+  // }
 
+  // loadData = () => JSON.parse(JSON.stringify(require('./data_original.json')));
+  loadData = (data) => ({
+    nodes: cloneDeep(data.nodes),
+    edges: cloneDeep(data.edges.filter(edge => edge.target !== edge.source))
+  });
 
-  updateDimensions = (e) => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
-  };
+  // resetData = () => {
+  //   const data = this.loadData(this.graph_data);
+  //   this.setState({ jsonNodes: data.nodes, jsonEdges: data.edges })
+  // }
 
-  resetData = () => {
-    let reloadedJson = this.loadData()
-    let cleanedEdges = reloadedJson.edges.filter((edge) => {
-      return edge.target !== edge.source
-    })
-    this.setState({ jsonNodes: reloadedJson.nodes, jsonEdges: cleanedEdges })
-  }
+  resetData = () => this.loadData(this.graph_data);
 
   handleClickNode = (e) => {
-    let reloadedJson = this.loadData()
-    let cleanedEdges = reloadedJson.edges.filter((edge) => {
-      return edge.target !== edge.source
-    })
-    if (this.state.clickedNodeId !== e.data.node.id) {
-      let target = e.data.node.id
-      this.setState({ clickedNodeId: target })
-      let filterKeys = {}
-      let filteredEdges = cleanedEdges.map((edge) => {
+    const target = e.data.node.id
+    const data = this.loadData(this.graph_data);
+
+    if (target !== this.state.clickedNodeId) {
+
+      const filterKeys = {}
+      const filteredEdges = data.edges.map(edge => {
         if (target === edge.source || target === edge.target) {
           filterKeys[edge.source] = true
           filterKeys[edge.target] = true
-
         } else {
           edge.color = 'rgba(192, 192, 192, 0.25)'
         }
         return edge
       })
-
-      let filteredNodes = reloadedJson.nodes.map((node) => {
+      const filteredNodes = data.nodes.map(node => {
         if (filterKeys[node.id]) {
           node.size = 5
         } else {
@@ -99,11 +106,11 @@ class Graph extends React.Component {
         }
         return node
       })
-      this.setState({ jsonEdges: filteredEdges, jsonNodes: filteredNodes })
+
+      this.setState({ clickedNodeId: target, jsonEdges: filteredEdges, jsonNodes: filteredNodes })
     } else {
       // this.graphData = {nodes: this.state.jsonNodesUnfiltered, edges: this.state.jsonEdgesUnfiltered}
-      this.setState({ clickedNodeId: null, jsonNodes: reloadedJson.nodes, jsonEdges: cleanedEdges })
-
+      this.setState({ clickedNodeId: null, jsonNodes: data.nodes, jsonEdges: data.edges })
     }
   }
 
@@ -152,13 +159,26 @@ class Graph extends React.Component {
 
   render() {
     return (
-      <div className="App" style={{ height: this.state.height, minHeight: '700px', width: this.state.width, minWidth: '700px' }}>
+      <div
+        className="Graph"
+        style={{
+          height: '100%',
+          minHeight: 500,
+          width: '100%',
+          minWidth: 500,
+          // background: 'red',
+        }}
+      >
         <FilterMenu filterNodes={this.filterNodes} resetData={this.resetData}></FilterMenu>
         <Sigma
           onClick={this.handleClick}
           renderer="canvas"
-          settings={this.state.settings}
-          style={this.state.style}
+          settings={settings}
+          style={{
+            width: '100%',
+            height: '100%',
+            margin: 0,
+          }}
           onClickNode={this.handleClickNode}
         >
           <SigmaLoader graph={{ nodes: this.state.jsonNodes, edges: this.state.jsonEdges }}>

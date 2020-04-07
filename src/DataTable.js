@@ -1,29 +1,75 @@
-import React from 'react'
-import MaterialTable from 'material-table'
+import React from 'react';
+import MaterialTable from 'material-table';
+import Paper from '@material-ui/core/Paper';
+// import Typography from '@material-ui/core/Typography';
 
 //
 // TODO:
 // Filter by range https://github.com/mbrn/material-table/pull/1351
 //
 
-const Table = ({ data, columns }) => {
+const DataTable = ({ data, columns }) => {
   let dataArray;
   if (Array.isArray(data)) dataArray = data;
   else if (typeof data === 'object' && data !== null) dataArray = Object.values(data);
   else dataArray = [];
-  
+
   return (
     <MaterialTable
-      title="I found these papers for you:"
-      columns={columns}
+      title="I found these for you:"
+      columns={[
+        {
+          title: 'Title',
+          field: 'title',
+          // customFilterAndSearch: (term, rowData) => term == rowData.name.length,
+          cellStyle: {
+            fontWeight: 'bold',
+            maxWidth: '30em',
+            whiteSpace: 'normal', // multiple lines
+            // overflow: 'auto', // scrolling
+            // textOverflow: 'ellipsis', // ellip...
+          },
+          headerStyle: {
+            maxWidth: '30em',
+            whiteSpace: 'normal',
+          }
+        },
+        { title: 'Score', field: 'score', type: 'numeric' },
+        { title: 'Date', field: 'date', type: 'date' },
+        {
+          title: 'Language',
+          field: 'language',
+          lookup: { en: 'English', de: 'German', fr: 'French' },
+        },
+        // { title: 'Year', field: 'year', type: 'numeric' },
+        // {
+        //   title: 'Country',
+        //   field: 'country',
+        //   lookup: { 1: 'Switzerland', 2: 'China', 3: 'Italy', 4: 'USA' },
+        // },
+      ]}
       data={dataArray}
       detailPanel={[
         {
           tooltip: 'Show Abstract',
           render: rowData => {
             return (
-              <div style={{ padding: '8px 16px' }}>
-                {rowData.abstract}
+              <div
+                style={{
+                  padding: '4px 4px 4px 42px',
+                  background: 'rgba(0, 0, 0, 0.04)',
+                }}
+              >
+                <Paper variant="outlined"
+                  style={{
+                    padding: '8px 12px',
+                    whiteSpace: 'normal',
+                  }}
+                >
+                  {/* <Typography> */}
+                  {rowData.abstract}
+                  {/* </Typography> */}
+                </Paper>
               </div>
             )
           },
@@ -56,4 +102,4 @@ const Table = ({ data, columns }) => {
   )
 }
 
-export default Table;
+export default DataTable;

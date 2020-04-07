@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: '96%',
-    maxWidth: 1000,
+    width: '100%',
+    maxWidth: '50em',
   },
   input: {
     marginLeft: theme.spacing(1),

@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+// import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import Fade from '@material-ui/core/Fade';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import SearchInput from './SearchInput';
-import Table from './Table';
+import DataTable from './DataTable';
 
 import mockupData from './mockup_data';
 
@@ -65,7 +67,7 @@ const Search = () => {
       .then(
         (result) => {
           if (result.papers) setQuery({ status: 'success', data: result });
-          else setQuery({ status: 'error', data: { message: '' } });
+          else setQuery({ status: 'error', data: { message: 'Not a paper list.' } });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -88,7 +90,7 @@ const Search = () => {
 
     timerRef.current = setTimeout(() => {
       setQuery({ status: 'success', data: mockupData });
-    }, 1000);
+    }, 2000);
   };
 
   const columns = [
@@ -115,11 +117,11 @@ const Search = () => {
     // },
   ];
 
-  let content;
+  let content = null;
   switch (query.status) {
     case 'success':
       content = (
-        <Table data={query.data.papers} columns={columns} />
+        <DataTable data={query.data.papers} columns={columns} />
       );
       break;
     case 'progress':
@@ -128,12 +130,13 @@ const Search = () => {
           in={query.status === 'progress'}
           style={{
             transitionDelay: query.status === 'progress' ? '500ms' : '0ms',
+            textAlign: 'center', // TODO why here?
           }}
           unmountOnExit
         >
           <div>
             <CircularProgress />
-            <div>loading</div>
+            <div>loading...</div>
           </div>
 
         </Fade>
@@ -151,7 +154,21 @@ const Search = () => {
 
   return (
     <div className={classes.root}>
+      {/* <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        </Grid>
+        <Grid item justify="center">
+        </Grid>
+      </Grid> */}
+      <Typography variant="h4" component="h1" gutterBottom>{process.env.REACT_APP_TITLE}</Typography>
       <SearchInput value={input} onChange={handleChange} onSearch={handleSearch} />
+
       <div className={classes.placeholder}>
         {content}
       </div>

@@ -5,7 +5,7 @@
 
 #FilterMenuContainer {
   position: fixed;
-  height: 605px;
+  /* height: 605px; */
   width: 290px;
   background-color: rgba(241, 241, 241, 0.8);
   border: solid;
@@ -81,4 +81,5 @@
 
 #SearchBarContainer {
   margin-left: 10px;
+  padding-bottom: 10px;
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import ClusterIdObject from '../Components/ClusterIdObject'
 
-
 class SearchContainer extends React.Component {
 
     state = {
@@ -10,7 +9,8 @@ class SearchContainer extends React.Component {
     }
 
     componentDidMount() {
-        let json = this.loadData()
+        let json = this.props.resetData()
+        // debugger
         this.clusterObj = {}
         this.clusterIds = []
         json.nodes.forEach((node) => {
@@ -25,7 +25,7 @@ class SearchContainer extends React.Component {
         this.setState({ clusterObj: this.clusterObj, clusterIds: this.clusterIds })
     }
 
-    loadData = () => JSON.parse(JSON.stringify(require('../data_original.json')));
+    // loadData = () => JSON.parse(JSON.stringify(require('../data_original.json')));
 
     editClusterIds = (id) => {
         if (this.state.ActiveClusterIds.includes(id)) {
