@@ -218,8 +218,29 @@ export default function Main() {
       );
       break;
     case 'success':
+      const langs = !query.data.langs
+        ? {
+          en: 'English',
+          de: 'Deutsch',
+          fr: 'Français',
+          it: 'Italiano',
+          zh: 'Chinese',
+          es: 'Español',
+          pt: 'Português',
+          ja: 'Japanese',
+        }
+        : {
+          ...query.data.langs.en && { en: 'English' },
+          ...query.data.langs.de && { de: 'Deutsch' },
+          ...query.data.langs.fr && { fr: 'Français' },
+          ...query.data.langs.it && { it: 'Italiano' },
+          ...query.data.langs.zh && { zh: 'Chinese' },
+          ...query.data.langs.es && { es: 'Español' },
+          ...query.data.langs.pt && { pt: 'Português' },
+          ...query.data.langs.ja && { ja: 'Japanese' },
+        }
       drawerContent = (
-        <DataTable data={query.data.papers} />
+        <DataTable data={query.data.papers} langs={langs} />
       );
       break;
     case 'progress':
