@@ -25,7 +25,8 @@ import DataTable from './DataTable';
 // import Graph from './Graph';
 import GraphPanel from './GraphPanel';
 
-import mockupData from './mockup_data';
+import examples from './data/examples';
+import mockupData from './data/mockup_papers';
 
 // const drawerWidth = 120; // xx em?
 const drawerWidth = '100%';

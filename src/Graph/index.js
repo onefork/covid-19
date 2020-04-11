@@ -6,7 +6,7 @@ import { Sigma } from 'react-sigma';
 import SigmaLoader from './Sigma/Loader';
 import FilterMenu from './Components/FilterMenu'
 
-import mockup_data from './data';
+import mockup_data from '../data/mockup_graph';
 
 // TODO
 // handle component resize

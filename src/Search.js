@@ -9,7 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchInput from './SearchInput';
 import DataTable from './DataTable';
 
-import mockupData from './mockup_data';
+import mockupData from './data/mockup_papers';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -9,8 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TopicList from './TopicList';
 import Graph from './Graph';
 
-// import mockupData from './mockup_data';
-import topics from './topics';
+import topics from './data/topics';
 
 // TODO error handling not found
 // TODO routing / transition
