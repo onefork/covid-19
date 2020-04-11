@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "https://onefork.github.io/covid-19/static/css/main.93ac47a6.chunk.css",
-    "main.js": "https://onefork.github.io/covid-19/static/js/main.8354f067.chunk.js",
-    "main.js.map": "https://onefork.github.io/covid-19/static/js/main.8354f067.chunk.js.map",
+    "main.js": "https://onefork.github.io/covid-19/static/js/main.c0baf14c.chunk.js",
+    "main.js.map": "https://onefork.github.io/covid-19/static/js/main.c0baf14c.chunk.js.map",
     "runtime-main.js": "https://onefork.github.io/covid-19/static/js/runtime-main.05866867.js",
     "runtime-main.js.map": "https://onefork.github.io/covid-19/static/js/runtime-main.05866867.js.map",
-    "static/js/2.7647795b.chunk.js": "https://onefork.github.io/covid-19/static/js/2.7647795b.chunk.js",
-    "static/js/2.7647795b.chunk.js.map": "https://onefork.github.io/covid-19/static/js/2.7647795b.chunk.js.map",
+    "static/js/2.db995dbc.chunk.js": "https://onefork.github.io/covid-19/static/js/2.db995dbc.chunk.js",
+    "static/js/2.db995dbc.chunk.js.map": "https://onefork.github.io/covid-19/static/js/2.db995dbc.chunk.js.map",
     "index.html": "https://onefork.github.io/covid-19/index.html",
-    "precache-manifest.adc3bc4899a5c5d25d585727c388d322.js": "https://onefork.github.io/covid-19/precache-manifest.adc3bc4899a5c5d25d585727c388d322.js",
+    "precache-manifest.f677c71a4a38f610b03c64aa7c57c952.js": "https://onefork.github.io/covid-19/precache-manifest.f677c71a4a38f610b03c64aa7c57c952.js",
     "service-worker.js": "https://onefork.github.io/covid-19/service-worker.js",
     "static/css/main.93ac47a6.chunk.css.map": "https://onefork.github.io/covid-19/static/css/main.93ac47a6.chunk.css.map",
-    "static/js/2.7647795b.chunk.js.LICENSE.txt": "https://onefork.github.io/covid-19/static/js/2.7647795b.chunk.js.LICENSE.txt",
+    "static/js/2.db995dbc.chunk.js.LICENSE.txt": "https://onefork.github.io/covid-19/static/js/2.db995dbc.chunk.js.LICENSE.txt",
     "static/media/ColorWheel.png": "https://onefork.github.io/covid-19/static/media/ColorWheel.e372b9db.png",
     "static/media/curvedline.png": "https://onefork.github.io/covid-19/static/media/curvedline.19ebd9a2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.05866867.js",
-    "static/js/2.7647795b.chunk.js",
+    "static/js/2.db995dbc.chunk.js",
     "static/css/main.93ac47a6.chunk.css",
-    "static/js/main.8354f067.chunk.js"
+    "static/js/main.c0baf14c.chunk.js"
   ]
 }

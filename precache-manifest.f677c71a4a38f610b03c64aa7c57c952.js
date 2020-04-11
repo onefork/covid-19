@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c519501c47d9a44d68e167bf3da13b2d",
+    "revision": "7093ba453cc5fb39ddb9f45537c5ac2f",
     "url": "https://onefork.github.io/covid-19/index.html"
   },
   {
-    "revision": "260733e3105d53a7ecb1",
+    "revision": "bb98f72c9b9cac09fe51",
     "url": "https://onefork.github.io/covid-19/static/css/main.93ac47a6.chunk.css"
   },
   {
-    "revision": "f7ff0c0ba47a698b3dcd",
-    "url": "https://onefork.github.io/covid-19/static/js/2.7647795b.chunk.js"
+    "revision": "1a14885a665b5faee386",
+    "url": "https://onefork.github.io/covid-19/static/js/2.db995dbc.chunk.js"
   },
   {
     "revision": "d09ac505fec0e9130a1d5b85fb3fa6dc",
-    "url": "https://onefork.github.io/covid-19/static/js/2.7647795b.chunk.js.LICENSE.txt"
+    "url": "https://onefork.github.io/covid-19/static/js/2.db995dbc.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "260733e3105d53a7ecb1",
-    "url": "https://onefork.github.io/covid-19/static/js/main.8354f067.chunk.js"
+    "revision": "bb98f72c9b9cac09fe51",
+    "url": "https://onefork.github.io/covid-19/static/js/main.c0baf14c.chunk.js"
   },
   {
     "revision": "1a1168b2f2bd83c0c5f3",
