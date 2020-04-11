@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchInput = ({ value = '', onChange, onSearch, onMenu, onGraph }) => {
+const SearchInput = ({ value = '', placeholder, onChange, onSearch, onMenu, onGraph }) => {
   const classes = useStyles();
 
   // console.log('render')
@@ -61,7 +61,7 @@ const SearchInput = ({ value = '', onChange, onSearch, onMenu, onGraph }) => {
       </IconButton>
       <InputBase
         className={classes.input}
-        placeholder="What are you looking for?"
+        placeholder={placeholder || 'What are you looking for?'}
         inputProps={{ 'aria-label': 'search papers' }}
         value={value}
         onChange={onChange}

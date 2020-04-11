@@ -8,20 +8,19 @@ import Paper from '@material-ui/core/Paper';
 // Filter by range https://github.com/mbrn/material-table/pull/1351
 //
 
-const DataTable = ({ data, columns, langs }) => {
+const DataTable = ({ title, data, columns, langs }) => {
   let dataArray;
   if (Array.isArray(data)) dataArray = data;
   else if (typeof data === 'object' && data !== null) dataArray = Object.values(data);
   else dataArray = [];
   return (
     <MaterialTable
-      title="I found these for you:"
+      title={title}
       columns={columns ||
         [
           {
             title: 'Title',
             field: 'title',
-            // customFilterAndSearch: (term, rowData) => term == rowData.name.length,
             cellStyle: {
               fontWeight: 'bold',
               maxWidth: '30em',
@@ -34,7 +33,13 @@ const DataTable = ({ data, columns, langs }) => {
               whiteSpace: 'normal',
             }
           },
-          { title: 'Score', field: 'score', type: 'numeric' },
+          {
+            title: 'Score',
+            field: 'score',
+            type: 'numeric',
+            customFilterAndSearch:
+              (term, rowData) => !isNaN(term) && rowData.score.toString().startsWith(term),
+          },
           { title: 'Date', field: 'date', type: 'date' },
           {
             title: 'Language',
@@ -102,9 +107,11 @@ const DataTable = ({ data, columns, langs }) => {
       ]}
       onRowClick={(event, rowData, togglePanel) => togglePanel()}
       options={{
+        pageSize: 8,
+        pageSizeOptions: [5, 8, 10, 20, 50],
         filtering: true,
-        grouping: true,
-        exportButton: true
+        // grouping: true,
+        exportButton: true,
       }}
     />
   )

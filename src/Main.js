@@ -1,4 +1,5 @@
 import React from 'react';
+import sample from 'lodash/sample';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -116,6 +117,7 @@ export default function Main() {
   const classes = useStyles();
   const theme = useTheme();
   const [input, setInput] = React.useState(''); // default input
+  const [placeholder, setPlaceholder] = React.useState();
   const [graphOnly, setGraphOnly] = React.useState(false);
   const [listFull, setListFull] = React.useState(false);
   const [query, setQuery] = React.useState({ status: 'idle' });
@@ -149,6 +151,7 @@ export default function Main() {
 
   const handleChange = (event) => {
     setInput(event.target.value);
+    placeholder !== undefined && setPlaceholder(undefined);
   };
 
   const handleSearch = (event) => {
@@ -159,7 +162,10 @@ export default function Main() {
     setListFull(true);
 
     const url = new URL(process.env.REACT_APP_BACKEND || 'http://localhost:8000/papers');
-    url.search = new URLSearchParams({ 'q': input });
+
+    let qInput = input;
+    qInput === '' && setPlaceholder(qInput = sample(examples));
+    url.search = new URLSearchParams({ 'q': qInput });
 
     fetch(url,
       {
@@ -206,9 +212,13 @@ export default function Main() {
   let drawerContent = null;
   switch (query.status) {
     case 'idle':
+      // TODO add credits
       drawerContent = (
         <Box m={5} style={{ whiteSpace: "normal" }}>
           <Typography>
+            <b>Ask a question like "<i>whats corona virus</i>". </b>
+            If you don't know what to ask, just click the search button. I can give you a hint.
+            <br /><br />
             We still have several bugs to fight with.
             <br />
             If you're interested, please visit us again this week for a fully functional live demo.
@@ -219,6 +229,7 @@ export default function Main() {
       );
       break;
     case 'success':
+      const title = listFull ? 'I found these papers for you:' : '';
       const langs = !query.data.langs
         ? {
           en: 'English',
@@ -239,9 +250,43 @@ export default function Main() {
           ...query.data.langs.es && { es: 'Español' },
           ...query.data.langs.pt && { pt: 'Português' },
           ...query.data.langs.ja && { ja: 'Japanese' },
-        }
+        };
+      const columns = [
+        {
+          title: 'Title',
+          field: 'title',
+          cellStyle: {
+            fontWeight: 'bold',
+            maxWidth: '75em',
+            whiteSpace: 'normal', // multiple lines
+            // overflow: 'auto', // scrolling
+            // textOverflow: 'ellipsis', // ellip...
+          },
+          headerStyle: {
+            maxWidth: '75em',
+            whiteSpace: 'normal',
+          }
+        },
+        {
+          title: 'Score',
+          field: 'score',
+          type: 'numeric',
+          // hidden: !listFull, // TODO add hidden (MaterialTable bug)
+          customFilterAndSearch:
+            (term, rowData) => !isNaN(term) && rowData.score.toString().startsWith(term),
+        },
+        { title: 'Date', field: 'date', type: 'date' }, // TODO add hidden
+        { title: 'Language', field: 'lang', lookup: langs, hidden: !listFull },
+        // { title: 'Year', field: 'year', type: 'numeric' },
+        // {
+        //   title: 'Country',
+        //   field: 'country',
+        //   lookup: { 1: 'Switzerland', 2: 'China', 3: 'Italy', 4: 'USA' },
+        // },
+      ];
+
       drawerContent = (
-        <DataTable data={query.data.papers} langs={langs} />
+        <DataTable title={title} data={query.data.papers} columns={columns} />
       );
       break;
     case 'progress':
@@ -301,6 +346,7 @@ export default function Main() {
           <SearchInput
             style={{ margin: 'auto' }}
             value={input}
+            placeholder={placeholder}
             onChange={handleChange}
             onSearch={handleSearch}
             onMenu={handleDrawerToggle}
