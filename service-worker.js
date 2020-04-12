@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://onefork.github.io/covid-19/precache-manifest.f677c71a4a38f610b03c64aa7c57c952.js"
+  "https://onefork.github.io/covid-19/precache-manifest.a95553022d4168e090ca7d7174ff8f95.js"
 );
 
 self.addEventListener('message', (event) => {
