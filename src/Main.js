@@ -167,6 +167,7 @@ export default function Main() {
     qInput === '' && setPlaceholder(qInput = sample(examples));
     url.search = new URLSearchParams({ 'q': qInput });
 
+    // TODO if fail then load mockup
     fetch(url,
       {
         headers: new Headers({

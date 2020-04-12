@@ -6,6 +6,8 @@ import Paper from '@material-ui/core/Paper';
 //
 // TODO:
 // Filter by range https://github.com/mbrn/material-table/pull/1351
+// hide bug
+// add abstract search to custom title search (and remove search box)
 //
 
 const DataTable = ({ title, data, columns, langs }) => {
@@ -89,13 +91,13 @@ const DataTable = ({ title, data, columns, langs }) => {
         },
       ]}
       actions={[
-        {
-          icon: 'favorite_border',
-          tooltip: 'Add to collection',
-          onClick: (event, rowData) => {
-            // Do save operation
-          }
-        },
+        // {
+        //   icon: 'favorite_border',
+        //   tooltip: 'Add to collection',
+        //   onClick: (event, rowData) => {
+        //     // Do save operation
+        //   }
+        // },
         rowData => ({
           icon: 'open_in_new',
           tooltip: 'Open',
