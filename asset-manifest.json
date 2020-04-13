@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "https://onefork.github.io/covid-19/static/css/main.93ac47a6.chunk.css",
-    "main.js": "https://onefork.github.io/covid-19/static/js/main.3bddc202.chunk.js",
-    "main.js.map": "https://onefork.github.io/covid-19/static/js/main.3bddc202.chunk.js.map",
-    "runtime-main.js": "https://onefork.github.io/covid-19/static/js/runtime-main.05866867.js",
-    "runtime-main.js.map": "https://onefork.github.io/covid-19/static/js/runtime-main.05866867.js.map",
-    "static/js/2.db995dbc.chunk.js": "https://onefork.github.io/covid-19/static/js/2.db995dbc.chunk.js",
-    "static/js/2.db995dbc.chunk.js.map": "https://onefork.github.io/covid-19/static/js/2.db995dbc.chunk.js.map",
-    "index.html": "https://onefork.github.io/covid-19/index.html",
-    "precache-manifest.a95553022d4168e090ca7d7174ff8f95.js": "https://onefork.github.io/covid-19/precache-manifest.a95553022d4168e090ca7d7174ff8f95.js",
-    "service-worker.js": "https://onefork.github.io/covid-19/service-worker.js",
-    "static/css/main.93ac47a6.chunk.css.map": "https://onefork.github.io/covid-19/static/css/main.93ac47a6.chunk.css.map",
-    "static/js/2.db995dbc.chunk.js.LICENSE.txt": "https://onefork.github.io/covid-19/static/js/2.db995dbc.chunk.js.LICENSE.txt",
-    "static/media/ColorWheel.png": "https://onefork.github.io/covid-19/static/media/ColorWheel.e372b9db.png",
-    "static/media/curvedline.png": "https://onefork.github.io/covid-19/static/media/curvedline.19ebd9a2.png"
+    "main.css": "https://covid.xioix.net/static/css/main.93ac47a6.chunk.css",
+    "main.js": "https://covid.xioix.net/static/js/main.0352d41a.chunk.js",
+    "main.js.map": "https://covid.xioix.net/static/js/main.0352d41a.chunk.js.map",
+    "runtime-main.js": "https://covid.xioix.net/static/js/runtime-main.74be73e2.js",
+    "runtime-main.js.map": "https://covid.xioix.net/static/js/runtime-main.74be73e2.js.map",
+    "static/js/2.db995dbc.chunk.js": "https://covid.xioix.net/static/js/2.db995dbc.chunk.js",
+    "static/js/2.db995dbc.chunk.js.map": "https://covid.xioix.net/static/js/2.db995dbc.chunk.js.map",
+    "index.html": "https://covid.xioix.net/index.html",
+    "precache-manifest.8bfe8ea2ce4e8d823a3dd86d9b8444e9.js": "https://covid.xioix.net/precache-manifest.8bfe8ea2ce4e8d823a3dd86d9b8444e9.js",
+    "service-worker.js": "https://covid.xioix.net/service-worker.js",
+    "static/css/main.93ac47a6.chunk.css.map": "https://covid.xioix.net/static/css/main.93ac47a6.chunk.css.map",
+    "static/js/2.db995dbc.chunk.js.LICENSE.txt": "https://covid.xioix.net/static/js/2.db995dbc.chunk.js.LICENSE.txt",
+    "static/media/ColorWheel.png": "https://covid.xioix.net/static/media/ColorWheel.e372b9db.png",
+    "static/media/curvedline.png": "https://covid.xioix.net/static/media/curvedline.19ebd9a2.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.05866867.js",
+    "static/js/runtime-main.74be73e2.js",
     "static/js/2.db995dbc.chunk.js",
     "static/css/main.93ac47a6.chunk.css",
-    "static/js/main.3bddc202.chunk.js"
+    "static/js/main.0352d41a.chunk.js"
   ]
 }
