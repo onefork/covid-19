@@ -8837,6 +8837,11 @@ react-scripts@3.4.1:
   optionalDependencies:
     fsevents "2.1.2"
 
+react-sigma@^1.2.34:
+  version "1.2.34"
+  resolved "https://registry.yarnpkg.com/react-sigma/-/react-sigma-1.2.34.tgz#053f28e88c072b2f1bc0ab6f3a1ad34d53c58371"
+  integrity sha512-GYyZptmLLR+Q9AqjC8cKo6xxoyrhXz1dCrhYHRP26xZQA0oAkiNrWA4g8X7VsGn1uanqmrmR5IaLM20FZrObKA==
+
 react-transition-group@^4.0.0, react-transition-group@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.3.0.tgz#fea832e386cf8796c58b61874a3319704f5ce683"
