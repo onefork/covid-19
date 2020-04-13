@@ -219,12 +219,8 @@ export default function Main() {
           <Typography>
             <b>Ask a question like "<i>whats corona virus</i>". </b>
             If you don't know what to ask, just click the search button. I can give you a hint.
-            <br /><br />
-            We still have several bugs to fight with.
-            <br />
-            If you're interested, please visit us again this week for a fully functional live demo.
-            <br /><br />
-            :)
+            <br /><br /><br />
+            proudly presented by Browser-19, visit us at <a href="https://bit.ly/34vxVaM" target="_blank">bit.ly/34vxVaM</a>
           </Typography>
         </Box>
       );
